@@ -1,0 +1,39 @@
+const mongoose = require("mongoose");
+
+const insuranceSchema = new mongoose.Schema(
+  {
+    policyNumber: {
+      type: String,
+      required: true,
+      unique: true,
+    },
+    customerName: {
+      type: String,
+      required: true,
+    },
+    insuranceType: {
+      type: String,
+      required: true,
+    },
+    premiumAmount: {
+      type: Number,
+      required: true,
+    },
+    startDate: {
+      type: Date,
+      required: true,
+    },
+    endDate: {
+      type: Date,
+      required: true,
+    },
+    status: {
+      type: String,
+      enum: ["Active", "Expired", "Pending"],
+      default: "Pending",
+    },
+  },
+  { timestamps: true }
+);
+
+module.exports = mongoose.model("Insurance", insuranceSchema);
